@@ -16,19 +16,19 @@
 
 ---
 
+## 🚀 Live Demo
+
+Try the interactive prediction app here:  
+👉 https://wine-quality-prediction-wne6mqxfrsqpbqfqp75kxc.streamlit.app/
+
+---
+
 ## ⚡ Key Results
 
 - 🎯 **Accuracy:** 88.23%
 - 🌲 **Best Model:** Random Forest Classifier
 - 🔥 **Top Features:** Alcohol, Density, Volatile Acidity
 - ⚖️ **Dataset Size:** 6,497 samples
-
----
-
-## 🚀 Live Demo
-
-Try the interactive prediction app here:  
-👉 Coming Soon!
 
 ---
 
