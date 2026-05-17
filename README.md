@@ -1,6 +1,6 @@
 # 🍷 Wine Quality Prediction
 
-> A beginner-friendly Machine Learning project that predicts wine quality using physicochemical properties. Built with Python, Scikit-Learn, and Streamlit.
+> A Professional Machine Learning project that predicts wine quality using physicochemical properties. Built with Python, Scikit-Learn, and Streamlit.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square&logo=python)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.5.0-orange?style=flat-square&logo=scikit-learn)
