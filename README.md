@@ -8,12 +8,76 @@
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 ---
+## 🖼️ Visualizations
+
+| Correlation Heatmap | Feature Importance | Confusion Matrix |
+|---|---|---|
+| ![heatmap](images/heatmap.png) | ![importance](images/feature_importance.png) | ![matrix](images/confusion_matrix.png) |
+
+---
+
+## ⚡ Key Results
+
+- 🎯 **Accuracy:** 88.23%
+- 🌲 **Best Model:** Random Forest Classifier
+- 🔥 **Top Features:** Alcohol, Density, Volatile Acidity
+- ⚖️ **Dataset Size:** 6,497 samples
+
+---
+
+## 🚀 Live Demo
+
+Try the interactive prediction app here:  
+👉 Coming Soon!
+
+---
 
 ## 📌 Project Overview
 
 This project uses a dataset of red and white wines to predict whether a wine is **good** or **bad quality** based on its physicochemical properties (acidity, sugar, alcohol, etc.).
 
 The goal is to demonstrate a clean, end-to-end Machine Learning workflow — from raw data to a deployed prediction app.
+
+---
+
+## 🌍 Real-World Impact
+
+This model demonstrates how machine learning can support:
+- Quality control automation in wine production
+- Reduction of manual sensory evaluation costs
+- Data-driven decision making in food & beverage industries
+
+---
+
+## 📈 Pipeline Execution & Results
+
+Running the full pipeline produces a comprehensive output across data processing, model training, evaluation, and live predictions. Below is the detailed breakdown of the project outcomes:
+
+### 1. Data Preprocessing (`src/preprocess.py`)
+- **Data Merging**: Automatically loads and combines the raw `winequality-red.csv` and `winequality-white.csv` into a unified dataset comprising **6,497 samples** and 12 columns.
+- **Label Engineering**: Transforms the 0–10 `quality` score into a binary classification target: **Good (1)** for quality ≥ 7, and **Bad (0)** for all others.
+- **Data Splitting & Scaling**: Splits the dataset into an 80% training set and a 20% test set. Applies `StandardScaler()` to standardize physicochemical feature magnitudes, saving the scaler configuration to `models/scaler.pkl` to guarantee identical scaling for unseen inputs.
+
+### 2. Model Training (`src/train.py`)
+- The script evaluates the performance of a base linear model against a robust tree-based model:
+  - **Logistic Regression**: Achieved an accuracy of **~75%**.
+  - **Random Forest Classifier**: Achieved a significantly higher accuracy of **~88.23%** ✅.
+- **Model Serialization**: Random Forest is chosen as the final model due to its superior ability to capture complex, non-linear relationships in the chemical data. The finalized model is seamlessly exported to `models/wine_quality_model.pkl`.
+
+### 3. Model Evaluation (`src/evaluate.py`)
+- Outputs a detailed **Classification Report** explicitly emphasizing model robustness:
+  - **Overall Accuracy:** 88.23%
+  - **F1-Scores:** 0.93 for Bad quality wine and 0.65 for Good quality wine (reflecting the real-world scarcity/imbalance of high-tier wine samples).
+- Automatically renders and saves crucial analytical graphics into the `images/` directory:
+  - 🌡️ **Correlation Heatmap:** Maps pairwise linear relationships between physicochemical features.
+  - 📋 **Confusion Matrix:** Illustrates the raw count of True Positives/Negatives vs. False Predictions.
+  - 🌲 **Feature Importance:** Highlights that **Alcohol**, **Density**, and **Volatile Acidity** weigh the absolute heaviest when deciding a wine's quality.
+
+### 4. Interactive Predictions (`src/predict.py` & `app.py`)
+- **CLI Predictions:** The command-line script simulates raw backend functionality, validating unseen numerical samples against the loaded `.pkl` model and calculating the exact confidence percentage.
+- **Streamlit Web Dashboard:** Running `streamlit run app.py` launches a responsive, cleanly styled graphical interface. It provides interactive sliders for all the chemical metrics, dynamically computing and displaying **real-time quality predictions** using the saved Machine Learning artifacts.
+
+---
 
 ### 🎯 What This Project Covers
 - Exploratory Data Analysis (EDA)
@@ -51,41 +115,6 @@ Here is the chemical dictionary of the columns predicting the final sensory outc
 | `quality` | Score between 0–10 (target variable) |
 
 **Label Engineering:** Quality ≥ 7 → `Good (1)`, Quality < 7 → `Bad (0)`
-
----
-
-## 🗂️ Project Structure
-
-```
-wine-quality-prediction/
-│
-├── data/
-│   ├── winequality-red.csv          ← Raw red wine dataset
-│   ├── winequality-white.csv        ← Raw white wine dataset
-│   ├── winequality.names            ← Dataset description file
-│
-├── notebooks/
-│   └── wine_quality_analysis.ipynb  ← Interactive EDA and ML walkthrough
-│
-├── src/
-│   ├── preprocess.py                ← Data cleaning and feature scaling
-│   ├── train.py                     ← Model training and saving
-│   ├── evaluate.py                  ← Metrics, plots, and model comparison
-│   └── predict.py                   ← Predict quality for new wine samples
-│
-├── models/
-│   └── wine_quality_model.pkl       ← Saved best-performing model
-│
-├── images/
-│   ├── heatmap.png                  ← Feature correlation heatmap
-│   ├── confusion_matrix.png         ← Confusion matrix visualization
-│   └── feature_importance.png       ← Random Forest feature importance
-│
-├── app.py                           ← Streamlit prediction web app
-├── requirements.txt                 ← Python dependencies
-├── .gitignore                       ← Files excluded from version control
-└── README.md                        ← Project documentation (you're here!)
-```
 
 ---
 
@@ -145,50 +174,47 @@ Then open your browser at: `http://localhost:8501`
 
 ---
 
-## 📈 Pipeline Execution & Results
-
-Running the full pipeline produces a comprehensive output across data processing, model training, evaluation, and live predictions. Below is the detailed breakdown of the project outcomes:
-
-### 1. Data Preprocessing (`src/preprocess.py`)
-- **Data Merging**: Automatically loads and combines the raw `winequality-red.csv` and `winequality-white.csv` into a unified dataset comprising **6,497 samples** and 12 columns.
-- **Label Engineering**: Transforms the 0–10 `quality` score into a binary classification target: **Good (1)** for quality ≥ 7, and **Bad (0)** for all others.
-- **Data Splitting & Scaling**: Splits the dataset into an 80% training set and a 20% test set. Applies `StandardScaler()` to standardize physicochemical feature magnitudes, saving the scaler configuration to `models/scaler.pkl` to guarantee identical scaling for unseen inputs.
-
-### 2. Model Training (`src/train.py`)
-- The script evaluates the performance of a base linear model against a robust tree-based model:
-  - **Logistic Regression**: Achieved an accuracy of **~75%**.
-  - **Random Forest Classifier**: Achieved a significantly higher accuracy of **~88.23%** ✅.
-- **Model Serialization**: Random Forest is chosen as the final model due to its superior ability to capture complex, non-linear relationships in the chemical data. The finalized model is seamlessly exported to `models/wine_quality_model.pkl`.
-
-### 3. Model Evaluation (`src/evaluate.py`)
-- Outputs a detailed **Classification Report** explicitly emphasizing model robustness:
-  - **Overall Accuracy:** 88.23%
-  - **F1-Scores:** 0.93 for Bad quality wine and 0.65 for Good quality wine (reflecting the real-world scarcity/imbalance of high-tier wine samples).
-- Automatically renders and saves crucial analytical graphics into the `images/` directory:
-  - 🌡️ **Correlation Heatmap:** Maps pairwise linear relationships between physicochemical features.
-  - 📋 **Confusion Matrix:** Illustrates the raw count of True Positives/Negatives vs. False Predictions.
-  - 🌲 **Feature Importance:** Highlights that **Alcohol**, **Density**, and **Volatile Acidity** weigh the absolute heaviest when deciding a wine's quality.
-
-### 4. Interactive Predictions (`src/predict.py` & `app.py`)
-- **CLI Predictions:** The command-line script simulates raw backend functionality, validating unseen numerical samples against the loaded `.pkl` model and calculating the exact confidence percentage.
-- **Streamlit Web Dashboard:** Running `streamlit run app.py` launches a responsive, cleanly styled graphical interface. It provides interactive sliders for all the chemical metrics, dynamically computing and displaying **real-time quality predictions** using the saved Machine Learning artifacts.
-
----
-
-## 🖼️ Visualizations
-
-| Correlation Heatmap | Feature Importance | Confusion Matrix |
-|---|---|---|
-| ![heatmap](images/heatmap.png) | ![importance](images/feature_importance.png) | ![matrix](images/confusion_matrix.png) |
-
----
-
 ## 🧠 ML Workflow
 
 ```
 Raw Data → EDA → Feature Engineering → Scaling
     → Train/Test Split → Model Training
     → Evaluation → Best Model Saved → Prediction App
+```
+
+---
+
+## 🗂️ Project Structure
+
+```
+wine-quality-prediction/
+│
+├── data/
+│   ├── winequality-red.csv          ← Raw red wine dataset
+│   ├── winequality-white.csv        ← Raw white wine dataset
+│   ├── winequality.names            ← Dataset description file
+│
+├── notebooks/
+│   └── wine_quality_analysis.ipynb  ← Interactive EDA and ML walkthrough
+│
+├── src/
+│   ├── preprocess.py                ← Data cleaning and feature scaling
+│   ├── train.py                     ← Model training and saving
+│   ├── evaluate.py                  ← Metrics, plots, and model comparison
+│   └── predict.py                   ← Predict quality for new wine samples
+│
+├── models/
+│   └── wine_quality_model.pkl       ← Saved best-performing model
+│
+├── images/
+│   ├── heatmap.png                  ← Feature correlation heatmap
+│   ├── confusion_matrix.png         ← Confusion matrix visualization
+│   └── feature_importance.png       ← Random Forest feature importance
+│
+├── app.py                           ← Streamlit prediction web app
+├── requirements.txt                 ← Python dependencies
+├── .gitignore                       ← Files excluded from version control
+└── README.md                        ← Project documentation (you're here!)
 ```
 
 ---
@@ -214,8 +240,9 @@ This project is licensed under the **MIT License** — feel free to use, modify,
 
 ## 🙋 Author
 
-**Your Name**
-- GitHub: [@rapfii](https://github.com/rapfii)
+**Rapfi**
+- GitHub: https://github.com/rapfii
+- LinkedIn: https://www.linkedin.com/in/raffi-khairan-hidayat
 
 ---
 
