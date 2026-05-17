@@ -1,0 +1,24 @@
+# ============================================================
+# Wine Quality Prediction — Dependencies
+# ============================================================
+# Install all at once:
+#   pip install -r requirements.txt
+# ============================================================
+
+# Core Data Science
+pandas==2.2.2
+numpy==1.26.4
+
+# Visualization
+matplotlib==3.9.0
+seaborn==0.13.2
+
+# Machine Learning
+scikit-learn==1.5.0
+joblib==1.4.2
+
+# Web App (optional but recommended)
+streamlit==1.35.0
+
+# Utility
+openpyxl==3.1.4        # Excel support (useful for data export)
